@@ -2,7 +2,7 @@ version: "3"
 
 services:
   vpn-server:
-    image: strongx509/strongswan:latest
+    image: strongswan:5.9.10
     container_name: vpn-server
     cap_add:
       - NET_ADMIN
@@ -10,16 +10,20 @@ services:
       - SYS_MODULE
     stdin_open: true
     tty: true
+    ports:
+      - 500:500
+      - 4500:4500
     volumes:
       - ./server:/etc/swanctl
       - ./strongswan.conf:/etc/strongswan.conf
+    command: /charon
     networks:
       internet:
          ipv4_address: 192.168.0.2
       intranet:
          ipv4_address: 10.1.0.2
   vpn-client:
-    image: strongx509/strongswan:latest
+    image: strongswan:5.9.10
     container_name: vpn-client
     depends_on:
       - vpn-server
@@ -29,6 +33,7 @@ services:
       - SYS_MODULE
     stdin_open: true
     tty: true
+    command: /charon
     volumes:
       - ./client:/etc/swanctl
       - ./strongswan.conf:/etc/strongswan.conf
