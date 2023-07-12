@@ -20,7 +20,7 @@ RUN \
     --enable-constraints --enable-pki --enable-socket-default         \
     --enable-kernel-netlink --enable-swanctl --enable-resolve         \
     --enable-eap-identity --enable-eap-md5 --enable-eap-dynamic       \
-    --enable-eap-tls --enable-updown --enable-vici                    \
+    --enable-eap-tls --enable-eap-mschapv2 --enable-updown --enable-vici                    \
     --enable-silent-rules  && \
    make all && make install && \
    cd / && rm -R strongswan-build && \

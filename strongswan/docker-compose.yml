@@ -11,8 +11,8 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - 500:500
-      - 4500:4500
+      - 500:500/udp
+      - 4500:4500/udp
     volumes:
       - ./server:/etc/swanctl
       - ./strongswan.conf:/etc/strongswan.conf
