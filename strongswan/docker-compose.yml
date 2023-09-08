@@ -22,24 +22,15 @@ services:
          ipv4_address: 192.168.0.2
       intranet:
          ipv4_address: 10.1.0.2
-  vpn-client:
-    image: strongswan:5.9.10
-    container_name: vpn-client
-    depends_on:
-      - vpn-server
-    cap_add:
-      - NET_ADMIN
-      - SYS_ADMIN
-      - SYS_MODULE
-    stdin_open: true
-    tty: true
-    command: /charon
-    volumes:
-      - ./client:/etc/swanctl
-      - ./strongswan.conf:/etc/strongswan.conf
+  ubuntu:
+    command: /usr/bin/tail -f /dev/null
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD="1"
+    image: ubuntu:latest
+    container_name: ubuntu
     networks:
-      internet:
-         ipv4_address: 192.168.0.3
+      intranet:
+        ipv4_address: 10.1.0.3
 
 networks:
   internet:
@@ -51,4 +42,4 @@ networks:
      ipam:
         driver: default
         config:
-          - subnet: 10.1.0.0/16 
+          - subnet: 10.0.0.0/8
