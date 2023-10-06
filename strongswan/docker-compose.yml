@@ -24,8 +24,6 @@ services:
          ipv4_address: 10.1.0.2
   ubuntu:
     command: /usr/bin/tail -f /dev/null
-    environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD="1"
     image: ubuntu:latest
     container_name: ubuntu
     networks:
@@ -42,4 +40,4 @@ networks:
      ipam:
         driver: default
         config:
-          - subnet: 10.1.0.0/16
+          - subnet: 10.1.0.0/24

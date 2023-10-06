@@ -2,7 +2,7 @@
 The docker-compose.yml starts a strongswan server and an ubuntu system. The strongswan server and the ubuntu system share a common local network. Only the strongswan-server has an additional network interface and is accessible by remote systems outside the docker host. The ubuntu server is accessible only by establishing a vpn connection with the strongswan server.
 ## Setup details
 Private network shared by strongswan-server and ubuntu system:
-`10.1.0.0/16`
+`10.1.0.0/24`
 
 Private address strongswan:
 `10.1.0.2`
@@ -29,7 +29,7 @@ docker exec --privileged ubuntu route add default gw 10.1.0.2
 One can connect to the strongswan-server using any ipsec client with the following settings:
 - Server: _Docker host_
 - Remote id: `server.strongswan.org`
-- Authentication: EAP-TLS
+- Authentication: username/password
 - Username: _username_
 - Password: _password_
 
